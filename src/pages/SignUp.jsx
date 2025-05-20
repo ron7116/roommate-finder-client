@@ -1,13 +1,32 @@
+import { useContext } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../context/AuthContext";
 
 const SignUp = () => {
+  const { createUser } = useContext(AuthContext);
+
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const { email, password, ...restForrmData } = Object.fromEntries(
+      formData.entries()
+    );
+
+    createUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
-    <div className="min-h-[calc(100vh-365px)] flex justify-center my-12">
-      
+    <div className="min-h-[calc(100vh-365px)] flex justify-center">
       <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
         <div className="card-body">
           <h2 className="text-3xl font-bold text-center mb-5">
-            Register your account
+            Sign up your account
           </h2>
           <p>
             <button className="btn w-full bg-white text-black border-[#e5e5e5] mb-10">
@@ -42,7 +61,7 @@ const SignUp = () => {
             </button>
           </p>
           <div className="divider">OR</div>
-          <form className="fieldset">
+          <form onSubmit={handleSignUp} className="fieldset">
             {/* name */}
             <label className="font-bold">Name</label>
             <input
@@ -82,7 +101,7 @@ const SignUp = () => {
             />
 
             <button type="submit" className="btn btn-neutral mt-4">
-              Register
+              Sign Up
             </button>
             <p className="font-bold text-accent text-center mt-2">
               Already Have An Account ?{" "}

@@ -1,6 +1,24 @@
+import { useContext } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../context/AuthContext";
 
 const LogIn = () => {
+  const { signInUser } = useContext(AuthContext);
+
+  const handleSignInUser = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const { email, password } = Object.fromEntries(formData.entries());
+
+    signInUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className="min-h-[calc(100vh-365px)] flex justify-center my-12">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -41,7 +59,7 @@ const LogIn = () => {
             </button>
           </p>
           <div className="divider">OR</div>
-          <form className="fieldset">
+          <form onSubmit={handleSignInUser} className="fieldset">
             <label className="font-bold">Email Address</label>
             <input
               type="email"
