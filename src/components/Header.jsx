@@ -1,6 +1,16 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router";
+import { AuthContext } from "../context/AuthContext";
 
 const Header = () => {
+  const { user, signOutUser } = useContext(AuthContext);
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className="navbar bg-white px-4">
       <div className="navbar-start">
@@ -85,8 +95,24 @@ const Header = () => {
       </div>
 
       <div className="navbar-end gap-5">
-        <Link to='/login' className="btn btn-outline btn-primary">Log In</Link>
-        <Link to='/signup' className="btn btn-outline btn-secondary">Sign Up</Link>
+        <p>{user?.email}</p>
+        {user?.email ? (
+          <button
+            onClick={handleSignOut}
+            className="btn btn-outline btn-primary"
+          >
+            LogOut
+          </button>
+        ) : (
+          <div>
+            <Link to="/login" className="btn btn-outline btn-primary">
+              Log In
+            </Link>
+            <Link to="/signup" className="btn btn-outline btn-secondary">
+              Sign Up
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

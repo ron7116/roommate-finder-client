@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 
 const LogIn = () => {
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser, googleSignInUser } = useContext(AuthContext);
 
   const handleSignInUser = (e) => {
     e.preventDefault();
@@ -19,6 +19,15 @@ const LogIn = () => {
         console.log(error);
       });
   };
+  const handleGoogleSignIn = () => {
+    googleSignInUser()
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className="min-h-[calc(100vh-365px)] flex justify-center my-12">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -27,7 +36,10 @@ const LogIn = () => {
             Login your account
           </h2>
           <p>
-            <button className="btn w-full bg-white text-black border-[#e5e5e5] ">
+            <button
+              onClick={handleGoogleSignIn}
+              className="btn w-full bg-white text-black border-[#e5e5e5] "
+            >
               <svg
                 aria-label="Google logo"
                 width="16"
