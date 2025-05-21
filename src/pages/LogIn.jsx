@@ -1,10 +1,12 @@
 import { useContext } from "react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
+import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthContext";
 
 const LogIn = () => {
-  const { signInUser, googleSignInUser } = useContext(AuthContext);
-
+  const { signInUser, setUser, googleSignInUser } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
   const handleSignInUser = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -13,19 +15,45 @@ const LogIn = () => {
 
     signInUser(email, password)
       .then((result) => {
-        console.log(result.user);
+        const user = result.user;
+        setUser(user);
+        Swal.fire({
+          icon: "success",
+          title: "Login Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
-        console.log(error);
+        const errorMessage = error.message;
+        Swal.fire({
+          icon: "error",
+          title: "Failed to login",
+          text: errorMessage,
+        });
       });
   };
   const handleGoogleSignIn = () => {
     googleSignInUser()
       .then((result) => {
-        console.log(result.user);
+        const user = result.user;
+        setUser(user);
+        Swal.fire({
+          icon: "success",
+          title: "Login Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
-        console.log(error);
+        const errorMessage = error.message;
+        Swal.fire({
+          icon: "error",
+          title: "Failed to login",
+          text: errorMessage,
+        });
       });
   };
   return (

@@ -1,33 +1,78 @@
-import { useContext } from "react";
-import { Link } from "react-router";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router";
+import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthContext";
 
 const SignUp = () => {
-  const { createUser, googleSignInUser } = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { createUser, updateUserProfile, googleSignInUser, setUser } =
+    useContext(AuthContext);
 
   const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const { email, password, ...restForrmData } = Object.fromEntries(
+    const { name, photo, email, password } = Object.fromEntries(
       formData.entries()
     );
 
+    const upperCaseRex = /(?=.*[A-Z])/;
+    const lowerCaseRex = /(?=.*[a-z])/;
+    if (upperCaseRex.test(password) == false) {
+      setError(`Must be uppercase letter`);
+      return;
+    } else if (lowerCaseRex.test(password) == false) {
+      setError(`Must be lowercase letter`);
+      return;
+    } else if (password.length < 6) {
+      setError(`Must be 6 character or longer`);
+      return;
+    }
     createUser(email, password)
       .then((result) => {
-        console.log(result.user);
+        const user = result.user;
+        updateUserProfile({ displayName: name, photoURL: photo })
+          .then(() => {
+            setUser({ ...user, displayName: name, photoURL: photo });
+            Swal.fire({
+              icon: "success",
+              title: "Sign Up Successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate("/");
+          })
+          .catch((error) => console.log(error));
       })
       .catch((error) => {
-        console.log(error);
+        const errorMessage = error.message;
+        Swal.fire({
+          icon: "error",
+          title: "Failed to sign up",
+          text: errorMessage,
+        });
       });
   };
   const handleGoogleSignIn = () => {
     googleSignInUser()
       .then((result) => {
-        console.log(result.user);
+        setUser(result.user);
+        Swal.fire({
+          icon: "success",
+          title: "Sign Up Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        const errorMessage = error.message;
+        Swal.fire({
+          icon: "error",
+          title: "Failed to sign up",
+          text: errorMessage,
+        });
       });
   };
   return (
@@ -111,7 +156,7 @@ const SignUp = () => {
               placeholder="Password"
               required
             />
-
+            {error && <p className="text-red-500">{error}</p>}
             <button type="submit" className="btn btn-neutral mt-4">
               Sign Up
             </button>

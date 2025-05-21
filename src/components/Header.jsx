@@ -95,16 +95,20 @@ const Header = () => {
       </div>
 
       <div className="navbar-end gap-5">
-        <p>{user?.email}</p>
-        {user?.email ? (
-          <button
-            onClick={handleSignOut}
-            className="btn btn-outline btn-primary"
-          >
-            LogOut
-          </button>
+        {user ? (
+          <div className="flex gap-2 items-center">
+            <div className="tooltip tooltip-left" data-tip={user?.displayName}>
+              <img className="w-10 rounded-full" src={user?.photoURL} alt="" />
+            </div>
+            <button
+              onClick={handleSignOut}
+              className="btn bg-black text-white hover:bg-gray-800 font-semibold px-6 rounded-full"
+            >
+              Logout
+            </button>
+          </div>
         ) : (
-          <div>
+          <div className="space-x-5">
             <Link to="/login" className="btn btn-outline btn-primary">
               Log In
             </Link>
