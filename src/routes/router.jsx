@@ -7,6 +7,7 @@ import Error from "../pages/Error";
 import Home from "../pages/Home";
 import Loader from "../pages/Loader";
 import LogIn from "../pages/LogIn";
+import MyListing from "../pages/MyListing";
 import SignUp from "../pages/SignUp";
 import PrivateRoute from "../privateRoute/PrivateRoute";
 
@@ -48,9 +49,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/my-listing",
+        loader: () => fetch("http://localhost:3000/users"),
+        hydrateFallbackElement: <Loader></Loader>,
         element: (
           <PrivateRoute>
-            <BrowserListing />
+            <MyListing></MyListing>
           </PrivateRoute>
         ),
       },
