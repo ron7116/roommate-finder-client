@@ -4,6 +4,7 @@ import AddFindRoommate from "../pages/AddFindRoommate";
 import BrowserListing from "../pages/BrowserListing";
 import Error from "../pages/Error";
 import Home from "../pages/Home";
+import Loader from "../pages/Loader";
 import LogIn from "../pages/LogIn";
 import SignUp from "../pages/SignUp";
 import PrivateRoute from "../privateRoute/PrivateRoute";
@@ -15,6 +16,8 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
+        loader: ()=>fetch('http://localhost:3000/users'),
+        hydrateFallbackElement: <Loader></Loader>,
         Component: Home,
       },
       {
