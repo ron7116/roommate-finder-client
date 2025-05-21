@@ -42,15 +42,26 @@ const Header = () => {
             </li>
             <li>
               <NavLink
-                to="/my-profile"
+                to="/find-roommate"
                 className="font-semibold hover:text-primary"
               >
-                My profile
+                Add to Find Roommate
               </NavLink>
             </li>
             <li>
-              <NavLink to="/help" className="font-semibold hover:text-primary">
-                Help
+              <NavLink
+                to="/browser-listing"
+                className="font-semibold hover:text-primary"
+              >
+                Browse Listing
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/my-listing"
+                className="font-semibold hover:text-primary"
+              >
+                My Listings
               </NavLink>
             </li>
           </ul>
@@ -75,19 +86,25 @@ const Header = () => {
           </li>
           <li>
             <NavLink
-              to="/my-profile"
+              to="/find-roommate"
               className="font-semibold hover:text-primary"
             >
               Add to Find Roommate
             </NavLink>
           </li>
           <li>
-            <NavLink to="/help" className="font-semibold hover:text-primary">
+            <NavLink
+              to="/browser-listing"
+              className="font-semibold hover:text-primary"
+            >
               Browse Listing
             </NavLink>
           </li>
           <li>
-            <NavLink to="/help" className="font-semibold hover:text-primary">
+            <NavLink
+              to="/my-listing"
+              className="font-semibold hover:text-primary"
+            >
               My Listings
             </NavLink>
           </li>
