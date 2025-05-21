@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 import Slider from "../components/Slider";
 
 const Home = () => {
@@ -32,7 +32,7 @@ const Home = () => {
                   <strong>Contact:</strong> {item.contact}
                 </p>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-primary">See More</button>
+                  <Link to={`/users/${item._id}`} className="btn btn-primary">See More</Link>
                 </div>
               </div>
             </div>

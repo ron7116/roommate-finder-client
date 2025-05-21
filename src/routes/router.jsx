@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import MainLayout from "../layouts/MainLayout";
 import AddFindRoommate from "../pages/AddFindRoommate";
 import BrowserListing from "../pages/BrowserListing";
+import Details from "../pages/Details";
 import Error from "../pages/Error";
 import Home from "../pages/Home";
 import Loader from "../pages/Loader";
@@ -16,7 +17,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        loader: ()=>fetch('http://localhost:3000/users'),
+        loader: () => fetch("http://localhost:3000/users"),
         hydrateFallbackElement: <Loader></Loader>,
         Component: Home,
       },
@@ -25,6 +26,17 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddFindRoommate />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/users/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/users/${params.id}`),
+        hydrateFallbackElement: <Loader></Loader>,
+        element: (
+          <PrivateRoute>
+            <Details></Details>
           </PrivateRoute>
         ),
       },
