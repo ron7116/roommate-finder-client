@@ -42,6 +42,8 @@ export const router = createBrowserRouter([
       },
       {
         path: "/browser-listing",
+        loader: () => fetch("http://localhost:3000/users"),
+        hydrateFallbackElement: <Loader></Loader>,
         Component: BrowserListing,
       },
       {
