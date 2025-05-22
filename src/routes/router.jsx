@@ -9,6 +9,7 @@ import Loader from "../pages/Loader";
 import LogIn from "../pages/LogIn";
 import MyListing from "../pages/MyListing";
 import SignUp from "../pages/SignUp";
+import Update from "../pages/Update";
 import PrivateRoute from "../privateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
@@ -54,6 +55,17 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyListing></MyListing>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/users/${params.id}`),
+        hydrateFallbackElement: <Loader></Loader>,
+        element: (
+          <PrivateRoute>
+            <Update></Update>
           </PrivateRoute>
         ),
       },

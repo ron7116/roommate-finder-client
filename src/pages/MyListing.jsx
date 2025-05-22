@@ -1,5 +1,5 @@
 import { use, useState } from "react";
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthContext";
 
@@ -67,9 +67,12 @@ const MyListing = () => {
               <td>{item.lifestyle}</td>
               <td>{item.availability}</td>
               <td className="space-x-3">
-                <button className="btn btn-sm btn-outline btn-info">
+                <Link
+                  to={`/update/${item._id}`}
+                  className="btn btn-sm btn-outline btn-info"
+                >
                   Update
-                </button>
+                </Link>
                 <button
                   onClick={() => handleDelete(item._id)}
                   className="btn btn-sm btn-outline btn-error"
