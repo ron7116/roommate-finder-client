@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthContext";
 
 const AddFindRoommate = () => {
-  const { user } = use(AuthContext);
+  const { user, count } = use(AuthContext);
   const email = user?.email;
   const handleAdd = (e) => {
     e.preventDefault();
@@ -12,6 +12,7 @@ const AddFindRoommate = () => {
     const userData = Object.fromEntries(formData.entries());
 
     const userInfo = {
+      count,
       email,
       ...userData,
     };
@@ -33,7 +34,7 @@ const AddFindRoommate = () => {
             timer: 1500,
           });
           e.target.reset();
-          console.log(data)
+          console.log(data);
         }
       });
   };

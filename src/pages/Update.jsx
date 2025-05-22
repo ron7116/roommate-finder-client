@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthContext";
 
 const Update = () => {
-  const { user } = use(AuthContext);
+  const { user} = use(AuthContext);
   const singleData = useLoaderData();
 
   const handleUpdate = (e) => {

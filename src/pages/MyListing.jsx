@@ -33,7 +33,7 @@ const MyListing = () => {
                 text: "Your file has been deleted.",
                 icon: "success",
               });
-              const remainingData = sameUserDataFilter.filter(
+              const remainingData = sameUserData.filter(
                 (value) => value._id !== id
               );
               setSameUserData(remainingData);
