@@ -29,7 +29,10 @@ const BrowserListing = () => {
               <td>{item.lifestyle}</td>
               <td>{item.availability}</td>
               <td>
-                <Link to={`/users/${item._id}`} className="btn btn-sm btn-primary">
+                <Link
+                  to={`/users/${item._id}`}
+                  className="btn btn-primary py-6 md:py-0 md:btn-sm"
+                >
                   See More
                 </Link>
               </td>

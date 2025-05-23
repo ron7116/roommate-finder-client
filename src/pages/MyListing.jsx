@@ -66,7 +66,7 @@ const MyListing = () => {
               <td>{item.roomType}</td>
               <td>{item.lifestyle}</td>
               <td>{item.availability}</td>
-              <td className="space-x-3">
+              <td className="flex gap-3">
                 <Link
                   to={`/update/${item._id}`}
                   className="btn btn-sm btn-outline btn-info"

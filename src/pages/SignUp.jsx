@@ -119,7 +119,7 @@ const SignUp = () => {
           </p>
           <div className="divider">OR</div>
           <form onSubmit={handleSignUp} className="fieldset">
-            {/* name */}
+            
             <label className="font-bold">Name</label>
             <input
               type="text"
@@ -129,7 +129,7 @@ const SignUp = () => {
               required
             />
 
-            {/* photo url */}
+            
             <label className="font-bold">Photo URL</label>
             <input
               type="text"
@@ -138,7 +138,7 @@ const SignUp = () => {
               placeholder="Enter Photo URL"
               required
             />
-            {/* email */}
+            
             <label className="font-bold">Email Address</label>
             <input
               type="email"
@@ -147,7 +147,7 @@ const SignUp = () => {
               placeholder="Email"
               required
             />
-            {/* password */}
+            
             <label className="font-bold">Password</label>
             <input
               type="password"
