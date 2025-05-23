@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { AiFillLike } from "react-icons/ai";
 import { useLoaderData } from "react-router";
+import Swal from "sweetalert2";
+import { AuthContext } from "../context/AuthContext";
 
 const Details = () => {
   const singleData = useLoaderData();
+  const { user } = useContext(AuthContext);
   const [count, setCount] = useState(singleData.count || 0);
   const [showContact, setShowContact] = useState(false);
 
   const handleCount = () => {
+    if (user?.email === singleData.email) {
+      Swal.fire({
+        text: `You can't like your own post.`,
+      });
+      return;
+    }
+
     const newCount = count + 1;
     setCount(newCount);
     setShowContact(true);
@@ -24,17 +34,17 @@ const Details = () => {
   };
 
   return (
-    <div className="min-h-screen py-10 px-4 text-gray-800 bg-white">
+    <div className="min-h-screen py-10 px-4 text-base-content bg-base-100">
       <div className="text-center mb-6">
-        <p className="text-lg font-semibold text-gray-700">
+        <p className="text-lg font-semibold text-base-content">
           {count} people interested
         </p>
-        <h1 className="text-4xl font-bold text-gray-900 mt-2">
+        <h1 className="text-4xl font-bold text-base-content mt-2">
           {singleData.title}
         </h1>
       </div>
 
-      <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 border border-gray-300 rounded-xl p-6 bg-white">
+      <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 border border-gray-300 rounded-xl p-6 bg-base-100">
         <div className="space-y-3">
           <p>
             <span className="font-semibold">Email:</span> {singleData.email}
@@ -76,9 +86,9 @@ const Details = () => {
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto mt-8 p-6 border border-gray-300 rounded-xl bg-white">
+      <div className="max-w-4xl mx-auto mt-8 p-6 border border-gray-300 rounded-xl bg-base-100">
         <h2 className="text-2xl font-semibold mb-2">Description</h2>
-        <p className="leading-relaxed text-gray-700">
+        <p className="leading-relaxed text-base-content">
           {singleData.description}
         </p>
       </div>

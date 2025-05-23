@@ -85,7 +85,7 @@ const SignUp = () => {
           <p>
             <button
               onClick={handleGoogleSignIn}
-              className="btn w-full bg-white text-black border-[#e5e5e5] mb-10"
+              className="btn w-full bg-base-100 text-base-content border-[#e5e5e5] mb-10"
             >
               <svg
                 aria-label="Google logo"
