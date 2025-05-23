@@ -43,7 +43,14 @@ const SignUp = () => {
             });
             navigate("/");
           })
-          .catch((error) => console.log(error));
+          .catch((error) => {
+            const errorMessage = error.message;
+            Swal.fire({
+              icon: "error",
+              title: "Failed to sign up",
+              text: errorMessage,
+            });
+          });
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -119,7 +126,6 @@ const SignUp = () => {
           </p>
           <div className="divider">OR</div>
           <form onSubmit={handleSignUp} className="fieldset">
-            
             <label className="font-bold">Name</label>
             <input
               type="text"
@@ -129,7 +135,6 @@ const SignUp = () => {
               required
             />
 
-            
             <label className="font-bold">Photo URL</label>
             <input
               type="text"
@@ -138,7 +143,7 @@ const SignUp = () => {
               placeholder="Enter Photo URL"
               required
             />
-            
+
             <label className="font-bold">Email Address</label>
             <input
               type="email"
@@ -147,7 +152,7 @@ const SignUp = () => {
               placeholder="Email"
               required
             />
-            
+
             <label className="font-bold">Password</label>
             <input
               type="password"

@@ -34,7 +34,7 @@ const AddFindRoommate = () => {
             timer: 1500,
           });
           e.target.reset();
-          console.log(data);
+          
         }
       });
   };

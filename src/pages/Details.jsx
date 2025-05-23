@@ -29,7 +29,9 @@ const Details = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("Updated count:", data);
+        if (data.modifiedCount) {
+          // console.log("Updated count:", data);
+        }
       });
   };
 
@@ -44,7 +46,7 @@ const Details = () => {
         </h1>
       </div>
 
-      <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 border border-gray-300 rounded-xl p-6 bg-base-100">
+      <div className="max-w-4xl mx-auto grid md:grid-cols-2  gap-8 border border-gray-300 rounded-xl p-6 bg-base-100">
         <div className="space-y-3">
           <p>
             <span className="font-semibold">Email:</span> {singleData.email}

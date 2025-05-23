@@ -2,13 +2,30 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
+import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthContext";
 
 const Header = ({ theme, toggleTheme }) => {
   const { user, signOutUser } = useContext(AuthContext);
 
   const handleSignOut = () => {
-    signOutUser().catch(console.log);
+    signOutUser()
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Logout Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        Swal.fire({
+          icon: "error",
+          title: "Failed to Log out",
+          text: errorMessage,
+        });
+      });
   };
 
   return (
