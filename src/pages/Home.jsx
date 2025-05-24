@@ -29,11 +29,18 @@ const Home = () => {
     <div className="bg-base-100 min-h-screen  text-gray-800">
       <Slider />
 
-      {/* Header section */}
       <div className="text-center py-16">
-        <h1 className="text-4xl font-bold  text-base-content">
-          Find Your Ideal Roommate
-        </h1>
+        <h2 className="text-3xl font-bold text-base-content">
+          <Typewriter
+            words={["Find Your Ideal Roommate"]}
+            loop={false}
+            cursor
+            cursorStyle="_"
+            typeSpeed={70}
+            deleteSpeed={50}
+            delaySpeed={1000}
+          />
+        </h2>
         <p className="text-md text-base-content max-w-2xl mx-auto mt-3">
           Browse through our available listings to connect with people who share
           similar preferences and are looking for roommates in your preferred
@@ -41,10 +48,9 @@ const Home = () => {
         </p>
       </div>
 
-      {/* Listings Grid */}
       <section>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {availableUsers.map((item) => (
+          {availableUsers?.map((item) => (
             <div
               key={item._id}
               className="border border-gray-300 rounded-xl p-6 bg-base-100 text-base-content shadow hover:shadow-lg transition"
@@ -85,7 +91,7 @@ const Home = () => {
           ))}
         </div>
       </section>
-      {/* smart */}
+
       <section className="py-12">
         <div className="text-center my-10">
           <h2 className="text-3xl font-bold text-base-content">
@@ -107,7 +113,7 @@ const Home = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {highlights.map((item, index) => (
+          {highlights?.map((item, index) => (
             <div
               key={index}
               className="border border-gray-300 rounded-xl p-6 bg-base-100 text-base-content shadow hover:shadow-lg transition"
@@ -121,11 +127,18 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Explore Roommate Cultures Section */}
       <section className="py-12 mt-16">
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-base-content">
-            Explore Roommate Cultures
+          <h2 className="text-3xl font-bold text-base-content">
+            <Typewriter
+              words={["Explore Roommate Cultures"]}
+              loop={false}
+              cursor
+              cursorStyle="_"
+              typeSpeed={70}
+              deleteSpeed={50}
+              delaySpeed={1000}
+            />
           </h2>
           <p className="mt-3 text-base-content text-lg">
             Shared living is more than splitting rent — it’s learning how people

@@ -4,8 +4,9 @@ import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthContext";
+import ThemeToggle from "./ThemeToggle";
 
-const Header = ({ theme, toggleTheme }) => {
+const Header = () => {
   const { user, signOutUser } = useContext(AuthContext);
 
   const handleSignOut = () => {
@@ -134,12 +135,7 @@ const Header = ({ theme, toggleTheme }) => {
       <div className="navbar-end gap-4 items-center">
         <label className="cursor-pointer flex items-center gap-2">
           {/* <span className="text-sm">{theme === "light" ? "Light" : "Dark"} Mode</span> */}
-          <input
-            type="checkbox"
-            className="toggle"
-            checked={theme === "dark"}
-            onChange={toggleTheme}
-          />
+          <ThemeToggle />
         </label>
 
         {user ? (

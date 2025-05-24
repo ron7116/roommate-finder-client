@@ -19,7 +19,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        loader: () => fetch("http://localhost:3000/users"),
+        loader: () => fetch("https://roomate-finder-server.vercel.app/users"),
         hydrateFallbackElement: <Loader></Loader>,
         Component: Home,
       },
@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
       {
         path: "/users/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/users/${params.id}`),
+          fetch(`https://roomate-finder-server.vercel.app/users/${params.id}`),
         hydrateFallbackElement: <Loader></Loader>,
         element: (
           <PrivateRoute>
@@ -44,13 +44,13 @@ export const router = createBrowserRouter([
       },
       {
         path: "/browser-listing",
-        loader: () => fetch("http://localhost:3000/users"),
+        loader: () => fetch("https://roomate-finder-server.vercel.app/users"),
         hydrateFallbackElement: <Loader></Loader>,
         Component: BrowserListing,
       },
       {
         path: "/my-listing",
-        loader: () => fetch("http://localhost:3000/users"),
+        loader: () => fetch("https://roomate-finder-server.vercel.app/users"),
         hydrateFallbackElement: <Loader></Loader>,
         element: (
           <PrivateRoute>
@@ -61,7 +61,7 @@ export const router = createBrowserRouter([
       {
         path: "/update/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/users/${params.id}`),
+          fetch(`https://roomate-finder-server.vercel.app/users/${params.id}`),
         hydrateFallbackElement: <Loader></Loader>,
         element: (
           <PrivateRoute>

@@ -22,7 +22,7 @@ const Details = () => {
     setCount(newCount);
     setShowContact(true);
 
-    fetch(`http://localhost:3000/users/${singleData._id}`, {
+    fetch(`https://roomate-finder-server.vercel.app/users/${singleData._id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ count: newCount }),

@@ -20,7 +20,7 @@ const BrowserListing = () => {
           </tr>
         </thead>
         <tbody>
-          {allUsers.map((item) => (
+          {allUsers?.map((item) => (
             <tr key={item._id}>
               <td>{item.title}</td>
               <td>{item.location}</td>

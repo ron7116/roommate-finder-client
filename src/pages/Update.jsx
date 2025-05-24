@@ -13,7 +13,7 @@ const Update = () => {
     const formData = new FormData(form);
     const userData = Object.fromEntries(formData.entries());
 
-    fetch(`http://localhost:3000/users/${singleData._id}`, {
+    fetch(`https://roomate-finder-server.vercel.app/users/${singleData._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

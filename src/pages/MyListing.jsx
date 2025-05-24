@@ -22,7 +22,7 @@ const MyListing = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/users/${id}`, {
+        fetch(`https://roomate-finder-server.vercel.app/users/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -58,7 +58,7 @@ const MyListing = () => {
           </tr>
         </thead>
         <tbody>
-          {sameUserData.map((item) => (
+          {sameUserData?.map((item) => (
             <tr key={item._id}>
               <td>{item.title}</td>
               <td>{item.location}</td>
