@@ -6,7 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 const MyListing = () => {
   const { allUsers } = useLoaderData();
   const { user } = use(AuthContext);
-  const sameUserDataFilter = allUsers.filter(
+  const sameUserDataFilter = allUsers?.filter(
     (item) => item.email == user.email
   );
   const [sameUserData, setSameUserData] = useState(sameUserDataFilter);
@@ -33,7 +33,7 @@ const MyListing = () => {
                 text: "Your file has been deleted.",
                 icon: "success",
               });
-              const remainingData = sameUserData.filter(
+              const remainingData = sameUserData?.filter(
                 (value) => value._id !== id
               );
               setSameUserData(remainingData);

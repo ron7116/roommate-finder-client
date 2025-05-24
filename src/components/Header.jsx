@@ -29,6 +29,13 @@ const Header = () => {
       });
   };
 
+  const navLinkClass = ({ isActive }) =>
+    `font-semibold hover:text-primary ${
+      isActive
+        ? "text-primary underline underline-offset-4"
+        : "text-base-content"
+    }`;
+
   return (
     <div className="navbar bg-base-100 text-base-content px-0">
       <div className="navbar-start">
@@ -54,31 +61,22 @@ const Header = () => {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <NavLink to="/" className="font-semibold hover:text-primary">
+              <NavLink to="/" className={navLinkClass}>
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="/find-roommate"
-                className="font-semibold hover:text-primary"
-              >
+              <NavLink to="/find-roommate" className={navLinkClass}>
                 Add to Find Roommate
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="/browser-listing"
-                className="font-semibold hover:text-primary"
-              >
+              <NavLink to="/browser-listing" className={navLinkClass}>
                 Browse Listing
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="/my-listing"
-                className="font-semibold hover:text-primary"
-              >
+              <NavLink to="/my-listing" className={navLinkClass}>
                 My Listings
               </NavLink>
             </li>
@@ -101,31 +99,22 @@ const Header = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 space-x-4">
           <li>
-            <NavLink to="/" className="font-semibold hover:text-primary">
+            <NavLink to="/" className={navLinkClass}>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/find-roommate"
-              className="font-semibold hover:text-primary"
-            >
+            <NavLink to="/find-roommate" className={navLinkClass}>
               Add to Find Roommate
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/browser-listing"
-              className="font-semibold hover:text-primary"
-            >
+            <NavLink to="/browser-listing" className={navLinkClass}>
               Browse Listing
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/my-listing"
-              className="font-semibold hover:text-primary"
-            >
+            <NavLink to="/my-listing" className={navLinkClass}>
               My Listings
             </NavLink>
           </li>
@@ -134,7 +123,6 @@ const Header = () => {
 
       <div className="navbar-end gap-4 items-center">
         <label className="cursor-pointer flex items-center gap-2">
-          {/* <span className="text-sm">{theme === "light" ? "Light" : "Dark"} Mode</span> */}
           <ThemeToggle />
         </label>
 
@@ -142,15 +130,13 @@ const Header = () => {
           <div className="flex items-center gap-2">
             <div
               data-tooltip-id="user-tooltip"
-              data-tooltip-content={
-                user?.displayName || "https://i.ibb.co/s9J9Tt8Z/user.png"
-              }
+              data-tooltip-content={user?.displayName || "User"}
               data-tooltip-place="left"
               className="cursor-pointer"
             >
               <img
                 className="w-8 h-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
-                src={user?.photoURL}
+                src={user?.photoURL || "https://i.ibb.co/s9J9Tt8Z/user.png"}
                 alt="User"
               />
               <Tooltip id="user-tooltip" />
