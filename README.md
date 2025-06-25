@@ -2,7 +2,7 @@
 
 ## Live Demo
 
-## https://roommate-finder-app-94a34.web.app
+## https://rommate-finder.netlify.app/
 
 ## Key Features
 
