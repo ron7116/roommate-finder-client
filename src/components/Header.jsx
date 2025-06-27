@@ -20,11 +20,10 @@ const Header = () => {
         });
       })
       .catch((error) => {
-        const errorMessage = error.message;
         Swal.fire({
           icon: "error",
           title: "Failed to Log out",
-          text: errorMessage,
+          text: error.message,
         });
       });
   };
@@ -37,133 +36,163 @@ const Header = () => {
     }`;
 
   return (
-    <div className="navbar bg-base-100 text-base-content px-0">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+    <div className="sticky top-0 z-50 bg-base-100 shadow">
+      <div className="navbar bg-base-100 text-base-content px-0 w-11/12 mx-auto">
+        {/* Mobile Menu */}
+        <div className="navbar-start">
+          <div className="dropdown">
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
+              <li>
+                <NavLink to="/" className={navLinkClass}>
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/about" className={navLinkClass}>
+                  About Us
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/services" className={navLinkClass}>
+                  Services
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/faq" className={navLinkClass}>
+                  FAQ
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/contact" className={navLinkClass}>
+                  Contact
+                </NavLink>
+              </li>
+              {user && (
+                <li>
+                  <NavLink to="/dashboard" className={navLinkClass}>
+                    Dashboard
+                  </NavLink>
+                </li>
+              )}
+            </ul>
           </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+
+          {/* Logo */}
+          <Link
+            to="/"
+            className="hidden md:flex items-center gap-2 text-xl font-bold text-base-content"
           >
+            <img
+              src="https://i.ibb.co/b5v53YJh/roommate.png"
+              alt="logo"
+              className="w-7 h-7"
+            />
+            RoomMate
+          </Link>
+        </div>
+
+        {/* Desktop Menu */}
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1 space-x-4">
             <li>
               <NavLink to="/" className={navLinkClass}>
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink to="/find-roommate" className={navLinkClass}>
-                Add to Find Roommate
+              <NavLink to="/about" className={navLinkClass}>
+                About Us
               </NavLink>
             </li>
             <li>
-              <NavLink to="/browser-listing" className={navLinkClass}>
-                Browse Listing
+              <NavLink to="/services" className={navLinkClass}>
+                Services
               </NavLink>
             </li>
             <li>
-              <NavLink to="/my-listing" className={navLinkClass}>
-                My Listings
+              <NavLink to="/faq" className={navLinkClass}>
+                FAQ
               </NavLink>
             </li>
+            <li>
+              <NavLink to="/contact" className={navLinkClass}>
+                Contact
+              </NavLink>
+            </li>
+            {user && (
+              <li>
+                <NavLink to="/dashboard" className={navLinkClass}>
+                  Dashboard
+                </NavLink>
+              </li>
+            )}
           </ul>
         </div>
 
-        <Link
-          to="/"
-          className="hidden md:flex items-center gap-2 text-xl font-bold text-base-content"
-        >
-          <img
-            src="https://i.ibb.co/b5v53YJh/roommate.png"
-            alt="logo"
-            className="w-7 h-7"
-          />
-          RoomMate
-        </Link>
-      </div>
+        {/* Right Section */}
+        <div className="navbar-end gap-4 items-center">
+          <label className="cursor-pointer flex items-center gap-2">
+            <ThemeToggle />
+          </label>
 
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 space-x-4">
-          <li>
-            <NavLink to="/" className={navLinkClass}>
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/find-roommate" className={navLinkClass}>
-              Add to Find Roommate
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/browser-listing" className={navLinkClass}>
-              Browse Listing
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/my-listing" className={navLinkClass}>
-              My Listings
-            </NavLink>
-          </li>
-        </ul>
-      </div>
-
-      <div className="navbar-end gap-4 items-center">
-        <label className="cursor-pointer flex items-center gap-2">
-          <ThemeToggle />
-        </label>
-
-        {user ? (
-          <div className="flex items-center gap-2">
-            <div
-              data-tooltip-id="user-tooltip"
-              data-tooltip-content={user?.displayName || "User"}
-              data-tooltip-place="left"
-              className="cursor-pointer"
-            >
-              <img
-                className="w-8 h-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
-                src={user?.photoURL || "https://i.ibb.co/s9J9Tt8Z/user.png"}
-                alt="User"
-              />
-              <Tooltip id="user-tooltip" />
+          {user ? (
+            <div className="flex items-center gap-2">
+              <div
+                data-tooltip-id="user-tooltip"
+                data-tooltip-content={user?.displayName || "User"}
+                data-tooltip-place="left"
+                className="cursor-pointer"
+              >
+                <img
+                  className="w-8 h-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
+                  src={user?.photoURL || "https://i.ibb.co/s9J9Tt8Z/user.png"}
+                  alt="User"
+                />
+                <Tooltip id="user-tooltip" />
+              </div>
+              <button
+                onClick={handleSignOut}
+                className="btn btn-outline btn-error btn-md"
+              >
+                Logout
+              </button>
             </div>
-            <button
-              onClick={handleSignOut}
-              className="btn btn-outline btn-error btn-md"
-            >
-              Logout
-            </button>
-          </div>
-        ) : (
-          <div className="flex items-center gap-2 sm:gap-3 flex-nowrap">
-            <Link
-              to="/login"
-              className="btn btn-xs sm:btn-md btn-outline btn-primary whitespace-nowrap"
-            >
-              Log In
-            </Link>
-            <Link
-              to="/signup"
-              className="btn btn-xs sm:btn-md btn-outline btn-secondary whitespace-nowrap"
-            >
-              Sign Up
-            </Link>
-          </div>
-        )}
+          ) : (
+            <div className="flex items-center gap-2 sm:gap-3 flex-nowrap">
+              <Link
+                to="/login"
+                className="btn btn-xs sm:btn-md btn-outline btn-primary whitespace-nowrap"
+              >
+                Log In
+              </Link>
+              <Link
+                to="/signup"
+                className="btn btn-xs sm:btn-md btn-outline btn-secondary whitespace-nowrap"
+              >
+                Sign Up
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   FaGlobeAsia,
   FaLanguage,
@@ -7,9 +8,22 @@ import {
 import { Link, useLoaderData } from "react-router";
 import { Typewriter } from "react-simple-typewriter";
 import Slider from "../components/Slider";
+import PopularCities from "./PopularCities";
 
 const Home = () => {
-  const { availableUsers } = useLoaderData();
+  const { availableUsers, allUsers } = useLoaderData();
+  const [infoDisplay, setInfoDisplay] = useState([]);
+  const [showAll, setShowAll] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    if (showAll) {
+      setInfoDisplay(allUsers);
+    } else {
+      setInfoDisplay(availableUsers);
+    }
+  }, [allUsers, availableUsers, showAll]);
+
   const highlights = [
     {
       title: "Lifestyle Match",
@@ -26,7 +40,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="bg-base-100 min-h-screen  text-gray-800">
+    <div className="bg-base-100 min-h-screen text-gray-800">
       <Slider />
 
       <div className="text-center py-16">
@@ -49,46 +63,74 @@ const Home = () => {
       </div>
 
       <section>
+        {/*  Search by Location */}
+        <div className="text-center mb-8">
+          <input
+            type="text"
+            placeholder="Search by location..."
+            className="input input-bordered w-full max-w-md"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
+          />
+        </div>
+
+        {/*  Filtered Roommate Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {availableUsers?.map((item) => (
-            <div
-              key={item._id}
-              className="border border-gray-300 rounded-xl p-6 bg-base-100 text-base-content shadow hover:shadow-lg transition"
-            >
-              <h2 className="text-xl font-semibold text-primary mb-2">
-                {item.title}
-              </h2>
-              <p>
-                <strong>Location:</strong> {item.location}
-              </p>
-              <p>
-                <strong>Rent:</strong> BDT {item.rent}
-              </p>
-              <p>
-                <strong>Room Type:</strong> {item.roomType}
-              </p>
-              <p>
-                <strong>Lifestyle:</strong> {item.lifestyle}
-              </p>
-              <p>
-                <strong>Description:</strong> {item.description}
-              </p>
-              <p>
-                <strong>Contact:</strong> {item.contact}
-              </p>
-              <p>
-                <strong>Available:</strong> {item.availability}
-              </p>
-              <div className="mt-4 text-right">
-                <Link
-                  to={`/users/${item._id}`}
-                  className="btn btn-sm btn-primary"
-                >
-                  See More
-                </Link>
+          {infoDisplay
+            ?.filter((item) =>
+              item.location.toLowerCase().includes(searchTerm)
+            )
+            .map((item) => (
+              <div
+                key={item._id}
+                className="border border-gray-300 rounded-xl p-6 bg-base-100 text-base-content shadow hover:shadow-lg transition"
+              >
+                <h2 className="text-xl font-semibold text-primary mb-2">
+                  {item.title}
+                </h2>
+                <p>
+                  <strong>Location:</strong> {item.location}
+                </p>
+                <p>
+                  <strong>Rent:</strong> BDT {item.rent}
+                </p>
+                <p>
+                  <strong>Room Type:</strong> {item.roomType}
+                </p>
+                <p>
+                  <strong>Lifestyle:</strong> {item.lifestyle}
+                </p>
+                <p>
+                  <strong>Description:</strong> {item.description}
+                </p>
+                <p>
+                  <strong>Contact:</strong> {item.contact}
+                </p>
+                <p>
+                  <strong>Available:</strong> {item.availability}
+                </p>
+                <div className="mt-4 text-right">
+                  <Link
+                    to={`/users/${item._id}`}
+                    className="btn btn-sm btn-primary"
+                  >
+                    See More
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+        </div>
+
+        <div className="text-center">
+          <button
+            onClick={() => {
+              setShowAll((prev) => !prev);
+              if (showAll) window.scroll(0, 350);
+            }}
+            className="text-white font-semibold text-xl bg-primary px-5 py-3 rounded-full cursor-pointer mt-8"
+          >
+            {showAll ? "Show Less Listing" : "Show All Listing"}
+          </button>
         </div>
       </section>
 
@@ -113,7 +155,7 @@ const Home = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {highlights?.map((item, index) => (
+          {highlights.map((item, index) => (
             <div
               key={index}
               className="border border-gray-300 rounded-xl p-6 bg-base-100 text-base-content shadow hover:shadow-lg transition"
@@ -198,6 +240,10 @@ const Home = () => {
             “The best roommates are different — but understanding.”
           </p>
         </div>
+      </section>
+
+      <section>
+        <PopularCities />
       </section>
     </div>
   );

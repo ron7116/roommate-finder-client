@@ -1,11 +1,11 @@
 import { Link, useLoaderData } from "react-router";
 
-const BrowserListing = () => {
+const DashboardHome = () => {
   const { allUsers } = useLoaderData();
   return (
     <div className="p-6 overflow-x-auto">
       <h1 className="text-2xl font-bold mb-4 text-center">
-        Browse Roommate Listings
+        All Roommate Listings
       </h1>
       <table className="table w-full table-zebra">
         <thead>
@@ -44,4 +44,4 @@ const BrowserListing = () => {
   );
 };
 
-export default BrowserListing;
+export default DashboardHome;

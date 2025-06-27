@@ -5,18 +5,24 @@ import Loader from "../pages/Loader";
 
 const MainLayout = () => {
   const { state } = useNavigation();
+
   return (
     <>
-      <header>
-        <nav className="w-11/12 mx-auto">
-          <Header></Header>
-        </nav>
+      {/* Sticky Header */}
+      <header className="sticky top-0 z-50">
+        <div className="w-11/12 mx-auto">
+          <Header />
+        </div>
       </header>
+
+      {/* Main content */}
       <main className="w-11/12 min-h-[calc(100vh-325px)] mx-auto my-5">
-        {state == "loading" ? <Loader></Loader> : <Outlet></Outlet>}
+        {state === "loading" ? <Loader /> : <Outlet />}
       </main>
+
+      {/* Footer */}
       <footer>
-        <Footer></Footer>
+        <Footer />
       </footer>
     </>
   );
